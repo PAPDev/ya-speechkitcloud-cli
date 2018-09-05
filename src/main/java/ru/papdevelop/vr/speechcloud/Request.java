@@ -3,6 +3,8 @@ package ru.papdevelop.vr.speechcloud;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.File;
+
 @Data
 @Builder
 public class Request {
@@ -11,5 +13,5 @@ public class Request {
     private Topic topic;
     private Lang lang;
     private Boolean disableAntimat;
-    private byte[] payload;
+    private File file;
 }

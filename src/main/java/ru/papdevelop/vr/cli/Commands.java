@@ -39,6 +39,6 @@ public class Commands {
     @Option(names = {"-p", "--profanity"}, description = PROFANITY_DESCRIPTION)
     private boolean profanityDisable = false;
 
-    @Option(names = {"-f", "--file"}, description = FILE_DESCRIPTION, required = false)
+    @Option(names = {"-f", "--file"}, description = FILE_DESCRIPTION, required = true)
     private File path;
 }

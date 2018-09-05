@@ -7,10 +7,8 @@ import ru.papdevelop.vr.speechcloud.Lang;
 import ru.papdevelop.vr.speechcloud.Request;
 import ru.papdevelop.vr.speechcloud.Topic;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
@@ -19,11 +17,12 @@ public class App {
 
     public static void main(String[] args) {
 
+        String[] test = {"-k", "819b9688-3abb-49b0-a4dc-779d4d39a66e", "-t", "queries", "-f", "/tmp/test_11025_mono.mp3"};
         Commands cmd = new Commands();
         CommandLine cl = getPreparedCommandLine(cmd);
 
         try {
-            cl.parse(args);
+            cl.parse(test);
         } catch (CommandLine.UnmatchedArgumentException | CommandLine.MissingParameterException e) {
             System.out.println(e.getMessage());
             cl.usage(System.out);
@@ -51,7 +50,7 @@ public class App {
                     .topic(cmd.getTopic())
                     .lang(cmd.getLang())
                     .disableAntimat(cmd.isProfanityDisable())
-                    .payload(getFilePayload(cmd.getPath()))
+                    .file(cmd.getPath())
                     .build());
             System.out.println(response);
         } catch (NoSuchFileException e) {
@@ -67,10 +66,6 @@ public class App {
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    private static byte[] getFilePayload(File file) throws IOException {
-        return Files.readAllBytes(file.toPath());
     }
 
     private static String generateUUID() {
