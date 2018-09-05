@@ -17,12 +17,11 @@ public class App {
 
     public static void main(String[] args) {
 
-        String[] test = {"-k", "819b9688-3abb-49b0-a4dc-779d4d39a66e", "-t", "queries", "-f", "/tmp/test_11025_mono.mp3"};
         Commands cmd = new Commands();
         CommandLine cl = getPreparedCommandLine(cmd);
 
         try {
-            cl.parse(test);
+            cl.parse(args);
         } catch (CommandLine.UnmatchedArgumentException | CommandLine.MissingParameterException e) {
             System.out.println(e.getMessage());
             cl.usage(System.out);
